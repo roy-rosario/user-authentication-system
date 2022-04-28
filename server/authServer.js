@@ -46,7 +46,11 @@ server.post('/login', async(req, res)=>{
         if(userPresent[0].length < 1) return res.status(403).send('user not found')
         const passed = await bcrypt.compare(req.body.password, userPresent[0][0].password)
         if(passed){
-            return res.status(200).send(true)
+            const user = {username: req.body.username}
+            const accessToken = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, {expiresIn: "15s"})
+            const refreshToken = jwt.sign(user, process.env.REFRESH_TOKEN_SECRET)
+            //refreshTokens.push(refreshToken)
+            return res.status(200).json({accessToken: accessToken, refreshToken: refreshToken})
         }
         else{
             res.status(403).send('invalid password')
