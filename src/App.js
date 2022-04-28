@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import SignUp from './pages/SignUp'
-import Login from './pages/LogIn'
+import LogIn from './pages/LogIn'
+import Dashboard from './pages/Dashboard'
 import Error from './pages/Error'
 import Container from 'react-bootstrap/Container'
 // import Button from 'react-bootstrap/Button'
@@ -18,8 +19,9 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path='/' element={<Login/>}/>
+        <Route path='/' element={<LogIn/>}/>
         <Route path='/signup' element={<SignUp/>}/>
+        <Route path='/dashboard' element={<Dashboard/>}/>
         <Route path='*' element={<Error/>}/>
       </Routes>
     </BrowserRouter>

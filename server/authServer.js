@@ -39,3 +39,20 @@ server.post('/signup', async(req, res)=>{
         res.status(400).send('unable to creat user now')
     }
 })
+
+server.post('/login', async(req, res)=>{
+    try{
+        const userPresent = await db.promise().query(`SELECT * FROM users WHERE username = "${req.body.username}"`)
+        if(userPresent[0].length < 1) return res.status(403).send('user not found')
+        const passed = await bcrypt.compare(req.body.password, userPresent[0][0].password)
+        if(passed){
+            return res.status(200).send(true)
+        }
+        else{
+            res.status(403).send('invalid password')
+        }
+    }
+    catch{
+        res.status(400).send('could not log in now')
+    }
+})
