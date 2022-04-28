@@ -1,24 +1,19 @@
-import logo from './logo.svg';
-import './App.css';
+import Container from 'react-bootstrap/Container'
+// import Button from 'react-bootstrap/Button'
+// import Alert from 'react-bootstrap/Alert'
+// import Breadcrumb from 'react-bootstrap/Breadcrumb'
+// import BreadcrumbItem from 'react-bootstrap/BreadcrumbItem'
+// import Card from 'react-bootstrap/Card'
+// import CardHeader from 'react-bootstrap/CardHeader'
+// import CardImg from 'react-bootstrap/CardImg'
+// import Form from 'react-bootstrap/Form'
+import 'bootstrap/dist/css/bootstrap.min.css'
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Container className="bg-dark text-light">
+        <h1>Hello world</h1>
+    </Container>
   );
 }
 
