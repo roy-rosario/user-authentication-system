@@ -3,6 +3,15 @@ const express = require('express')
 const server = express()
 const jwt = require("jsonwebtoken")
 const mysql = require('mysql2')
+const cors = require('cors')
+
+server.use(express.json())
+
+server.use(cors({
+    origin: "http://localhost:3000"
+}))
+
+server.listen(3001)
 
 const db = mysql.createConnection({
     host: "localhost",
@@ -10,10 +19,6 @@ const db = mysql.createConnection({
     password: "proxy17",
     database: "test_page"
 })
-
-server.use(express.json())
-
-server.listen(3001)
 
 server.get('/posts', async(req, res)=>{
     try{
