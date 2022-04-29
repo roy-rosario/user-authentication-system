@@ -4,6 +4,7 @@ const server = express()
 const jwt = require("jsonwebtoken")
 const mysql = require('mysql2')
 const cors = require('cors')
+const { json } = require('express/lib/response')
 
 server.use(express.json())
 
@@ -29,3 +30,24 @@ server.get('/posts', async(req, res)=>{
         res.status(400).send('could not retrieve users')
     }
 })
+
+server.post("/posts", verifyToken, async(req, res)=>{
+    try{
+        const result = await db.promise().query(`SELECT * FROM posts
+        JOIN users ON posts.user_id = users.id
+        HAVING users.username = "${req.body.username}"`)
+        res.status(200).json(result[0])
+    }
+    catch{
+        res.status(400).send('could not request data')
+    }
+})
+
+function verifyToken(req, res, next){
+    const token = localStorage.getItem('token')
+    jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, decoded)=>{
+        if(err) return res.status(403).send("invalid credentials")
+        req.user = decoded
+        next()
+    })
+}

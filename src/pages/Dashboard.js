@@ -1,27 +1,26 @@
 import {useEffect} from 'react'
 import {useNavigate} from 'react-router-dom'
 import {jsonwebtoken} from 'jsonwebtoken'
+import 'dotenv/config'
+
 
 function Dashboard(){
-    const redirect = useNavigate()
+    // const redirect = useNavigate()
+    // const secret = process.env.REACT_APP_ACCESS_TOKEN_SECRET
     // const jwt = jsonwebtoken
 
     // const verify =() => {
-    //     jwt.verify(localStorage.getItem("token"), process.env.ACCESS_TOKEN_SECRET, (err, decoded)=>{
-    //         if(err) return null
-    //         return true
+    //     jwt.verify(localStorage.getItem("token"), secret, (err, decoded)=>{
+    //         if(err) return "wrong token"
+    //         return decoded
     //     })
     // }
 
-    useEffect(()=>{
-        if(!localStorage.getItem('token')){
-            redirect("/")
-        }
-    },[])
+    // console.log(verify())
 
     return(
         <div>
-            <h1>This is the Dashboard</h1>
+            <h1>Dashboard</h1>
         </div>
     )
 }
