@@ -60,3 +60,10 @@ server.post('/login', async(req, res)=>{
         res.status(400).send('could not log in now')
     }
 })
+
+server.post('/verify', (req,res)=>{
+    jwt.verify(req.body.token, process.env.ACCESS_TOKEN_SECRET, (err, decoded)=>{
+        if(err) return res.json(false)
+        res.json(true)
+    })
+})

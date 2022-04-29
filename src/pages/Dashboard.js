@@ -1,22 +1,22 @@
-import {useEffect} from 'react'
+import {useEffect, useState} from 'react'
 import {useNavigate} from 'react-router-dom'
-import {jsonwebtoken} from 'jsonwebtoken'
-import 'dotenv/config'
+import axios from 'axios'
+import {verification} from '../services/authServices'
 
 
 function Dashboard(){
-    // const redirect = useNavigate()
-    // const secret = process.env.REACT_APP_ACCESS_TOKEN_SECRET
-    // const jwt = jsonwebtoken
+    const redirect = useNavigate()
 
-    // const verify =() => {
-    //     jwt.verify(localStorage.getItem("token"), secret, (err, decoded)=>{
-    //         if(err) return "wrong token"
-    //         return decoded
-    //     })
-    // }
+    const verify = async()=>{
+        await verification()
+        .then(res => !res.data && redirect('/'))
+        .catch(err => alert(err))
+    }
 
-    // console.log(verify())
+    useEffect(()=>{
+        verify()
+    },[])
+
 
     return(
         <div>

@@ -13,4 +13,13 @@ export const logIn = async({username, password})=>{
         )
         
         
-} 
+}
+
+export const verification = async()=>{
+       
+        return(
+                await axios.post('http://localhost:4001/verify', {token: localStorage.getItem('token')})
+                .then(result => result)
+                .catch(err => err)
+        )
+}
