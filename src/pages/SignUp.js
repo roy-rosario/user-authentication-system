@@ -1,15 +1,12 @@
 import {useState} from 'react'
-import "bootstrap/dist/css/bootstrap.min.css"
-import Container from 'react-bootstrap/Container'
-import Form from 'react-bootstrap/Form'
-import Button from 'react-bootstrap/Button'
 import {useNavigate} from 'react-router-dom'
 import {profileCreate} from '../services/authServices'
+import UserPassword from '../components/UserPasswordComponent'
 
 function SignUp(){
     const [user, setUser] = useState('')
     const [password, setPassword] = useState('')
-    let redirect = useNavigate()
+    const redirect = useNavigate()
 
     console.log(user ,password)
 
@@ -31,20 +28,17 @@ function SignUp(){
     }
 
     return(
-        <Container >
-        <Form onSubmit={createUser}>
-            <h1>Create Account</h1>
-            <Form.Group>
-                <Form.Label>username</Form.Label>
-                <Form.Control className="form-control" type="text" value={user} onChange={e => setUser(e.target.value)} />
-            </Form.Group>
-            <Form.Group>
-                <Form.Label>password</Form.Label>
-                <Form.Control className="form-control" type="password" value={password} onChange={e => setPassword(e.target.value)} />
-            </Form.Group>
-            <Button className="mt-3" variant="secondary" type="submit">Sign Up</Button>
-        </Form>
-    </Container>
+        <UserPassword 
+            heading={"Create Account"} 
+            btnLabel={"sign up"} 
+            submit={createUser} 
+            user={user} 
+            uProcedure={setUser} 
+            password={password} 
+            pProcedure={setPassword}
+            linkMessage={"Already have an account? Log in "}
+            linkTarget={"/"}
+        />
     )
 }
 

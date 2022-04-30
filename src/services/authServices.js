@@ -5,7 +5,7 @@ export const profileCreate = async(user, password) =>{
        return await axios.post('http://localhost:4001/signup', {username: user, password: password})
 }
 
-export const logIn = async(user, password)=>{
+export const profileAuthenticate = async(user, password)=>{
         let placeholder
         return(
                 await axios.post('http://localhost:4001/login', {username: user, password: password})

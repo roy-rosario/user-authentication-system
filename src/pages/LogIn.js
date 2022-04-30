@@ -1,10 +1,7 @@
-import 'bootstrap/dist/css/bootstrap.min.css'
-import Container from 'react-bootstrap/Container'
-import Form from 'react-bootstrap/Form'
-import Button from 'react-bootstrap/Button'
-import { logIn } from '../services/authServices'
-import { useState } from 'react'
+import {useState} from 'react'
 import {useNavigate} from 'react-router-dom'
+import {profileAuthenticate} from '../services/authServices'
+import UserPassword from '../components/UserPasswordComponent'
 
 function LogIn(){
     const [user, setUser] = useState('')
@@ -13,7 +10,7 @@ function LogIn(){
 
     const login = async(e) =>{
         e.preventDefault()
-        const result = await logIn(user, password)
+        const result = await profileAuthenticate(user, password)
         if(result){
             localStorage.setItem('token', result.accessToken)
             redirect('/dashboard')
@@ -24,20 +21,17 @@ function LogIn(){
     }
 
     return(
-        <Container >
-        <Form onSubmit={login}>
-            <h1>Log In</h1>
-            <Form.Group>
-                <Form.Label>username</Form.Label>
-                <Form.Control className="form-control" type="text" value={user} onChange={e => setUser(e.target.value)} />
-            </Form.Group>
-            <Form.Group>
-                <Form.Label>password</Form.Label>
-                <Form.Control className="form-control" type="password" value={password} onChange={e => setPassword(e.target.value)} />
-            </Form.Group>
-            <Button className="mt-3" variant="secondary" type="submit">Log In</Button>
-        </Form>
-    </Container>
+            <UserPassword 
+                heading={"Log In"} 
+                btnLabel={"Log In"} 
+                submit={login} 
+                user={user} 
+                uProcedure={setUser} 
+                password={password} 
+                pProcedure={setPassword}
+                linkMessage={"Don't have an account? Sign up "}
+                linkTarget={"/signup"}
+            />
     )
 }
 
