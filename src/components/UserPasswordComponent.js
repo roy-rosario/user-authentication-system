@@ -8,16 +8,7 @@ import {useState} from 'react'
 
 
 
-function UserPassword({heading, btnLabel, submit, user, uProcedure, password, pProcedure, linkMessage, linkTarget}){
-    const [show, setShow] = useState(false)
-    const handleClose = () => setShow(false)
-    const handleShow = () => setShow(true)
-
-    const credMessage = () =>{
-        if(user === "") return 'username field cannot be blank'
-        if(password === "") return 'password field cannot be blank'
-        else return
-    }
+function UserPassword({heading, btnLabel, submit, user, uProcedure, password, pProcedure, linkMessage, linkTarget, modalBool, modalProcedure, modalWarning}){
 
     return(
         <div style={{height:"100vh", overflow: "hidden", backgroundColor: "grey"}}>
@@ -33,26 +24,20 @@ function UserPassword({heading, btnLabel, submit, user, uProcedure, password, pP
                         <Form.Label>password</Form.Label>
                         <Form.Control className="form-control" type="password" value={password} onChange={e => pProcedure(e.target.value)} />
                     </Form.Group>
-                    {   user === "" || password === ""?
-                        <Button className="mt-3" variant="secondary" type="buton" onClick={handleShow}>{btnLabel}</Button>
-                        :
                         <Button className="mt-3" variant="secondary" type="submit">{btnLabel}</Button>
-                    }
                 </Form>
                 <h2 style={{marginTop:"2rem"}}>{linkMessage}<Link style={{color: "#212529"}} to={linkTarget}>here</Link></h2>
             </Container>
 
-            <Modal show={show} onHide={handleClose}>
+            <Modal show={modalBool} onHide={modalProcedure}>
                 <Modal.Header closeButton>
                 <Modal.Title>Attention</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    {
-                        credMessage()
-                    }
+                    {modalWarning}
                 </Modal.Body>
                 <Modal.Footer>
-                <Button variant="secondary" onClick={handleClose}>
+                <Button variant="secondary" onClick={modalProcedure}>
                     Close
                 </Button>
                 </Modal.Footer>

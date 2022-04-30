@@ -42,6 +42,8 @@ server.post('/signup', async(req, res)=>{
 
 server.post('/login', async(req, res)=>{
     try{
+        if (req.body.username === "") return res.status(400).send('username field cannot be blank')
+        if (req.body.password === "") return res.status(400).send('password field cannot be blank')
         const userPresent = await db.promise().query(`SELECT * FROM users WHERE username = "${req.body.username}"`)
         if(userPresent[0].length < 1) return res.status(403).send('user not found')
         const passed = await bcrypt.compare(req.body.password, userPresent[0][0].password)

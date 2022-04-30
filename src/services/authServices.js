@@ -13,7 +13,10 @@ export const profileAuthenticate = async(user, password)=>{
                      placeholder = result.data
                      return placeholder
                   })
-                .catch(err => alert(err.response.data))
+                .catch(err =>{
+                        placeholder =err.response.data
+                        return placeholder
+                } )
         )
         
         
