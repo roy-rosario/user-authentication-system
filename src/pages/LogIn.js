@@ -8,12 +8,12 @@ import {useNavigate} from 'react-router-dom'
 
 function LogIn(){
     const [user, setUser] = useState('')
-    const [pass, setPass] = useState('')
+    const [password, setPassword] = useState('')
     const redirect = useNavigate()
 
     const login = async(e) =>{
         e.preventDefault()
-        const result = await logIn({username: user, password: pass})
+        const result = await logIn(user, password)
         if(result){
             localStorage.setItem('token', result.accessToken)
             redirect('/dashboard')
@@ -33,7 +33,7 @@ function LogIn(){
             </Form.Group>
             <Form.Group>
                 <Form.Label>password</Form.Label>
-                <Form.Control className="form-control" type="password" value={pass} onChange={e => setPass(e.target.value)} />
+                <Form.Control className="form-control" type="password" value={password} onChange={e => setPassword(e.target.value)} />
             </Form.Group>
             <Button className="mt-3" variant="secondary" type="submit">Log In</Button>
         </Form>

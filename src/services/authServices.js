@@ -5,10 +5,10 @@ export const profileCreate = async(user, password) =>{
        return await axios.post('http://localhost:4001/signup', {username: user, password: password})
 }
 
-export const logIn = async({username, password})=>{
+export const logIn = async(user, password)=>{
         let placeholder
         return(
-                await axios.post('http://localhost:4001/login', {username: username, password: password})
+                await axios.post('http://localhost:4001/login', {username: user, password: password})
                 .then(result => {
                      placeholder = result.data
                      return placeholder
