@@ -1,6 +1,10 @@
 import axios from 'axios'
 
 
+export const profileCreate = async(user, password) =>{
+       return await axios.post('http://localhost:4001/signup', {username: user, password: password})
+}
+
 export const logIn = async({username, password})=>{
         let placeholder
         return(
@@ -23,3 +27,4 @@ export const verification = async()=>{
                 .catch(err => err)
         )
 }
+

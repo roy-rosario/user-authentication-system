@@ -16,6 +16,7 @@ function LogIn(){
         const result = await logIn({username: user, password: pass})
         if(result){
             localStorage.setItem('token', result.accessToken)
+            redirect('/dashboard')
             return
         }
         

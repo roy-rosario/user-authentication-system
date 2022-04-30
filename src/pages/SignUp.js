@@ -5,6 +5,7 @@ import Container from 'react-bootstrap/Container'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import {useNavigate} from 'react-router-dom'
+import {profileCreate} from '../services/authServices'
 
 function SignUp(){
     const [user, setUser] = useState('')
@@ -16,9 +17,9 @@ function SignUp(){
     const createUser= async(e)=>{
         e.preventDefault()
         try{
-            const response = await axios.post('http://localhost:4001/signup', {username: user, password: password})
+            const response = await profileCreate(user, password)
+            console.log(response)
             if(response){
-                console.log(response)
                 redirect('/')
             }
         }
