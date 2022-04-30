@@ -26,17 +26,15 @@ function LogIn(){
             return
         }
         const result = await profileAuthenticate(user, password)
-        if(result){
-            if(typeof result === "object"){
-                localStorage.setItem('token', result.accessToken)
-                redirect('/dashboard')
-                return
-            }
-            else{
-                setWarning(result)
-                handleShow()
-                return
-            }
+        if(typeof result === "object"){
+            localStorage.setItem('token', result.accessToken)
+            redirect('/dashboard')
+            return
+        }
+        else{
+            setWarning(result)
+            handleShow()
+            return
         }
         
 
