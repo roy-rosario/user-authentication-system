@@ -4,11 +4,12 @@ import {profileCreate} from '../services/authServices'
 import UserPassword from '../components/UserPasswordComponent'
 
 function SignUp(){
+    const redirect = useNavigate()
     const [user, setUser] = useState('')
     const [password, setPassword] = useState('')
-    const redirect = useNavigate()
     const [show, setShow] = useState(false)
     const [warning, setWarning] = useState('')
+    const [showTemp, setShowTemp] = useState(false)
 
     const handleShow = () =>{setShow(true)}
     const handleClose = () =>{setShow(false)}
@@ -18,13 +19,12 @@ function SignUp(){
         e.preventDefault()
         
         const response = await profileCreate(user, password)
-
         
         if(typeof response === 'object'){
-            alert(response.message+" press okay to be redirected to log in page")
+            setShowTemp(true)
             setTimeout(()=>{
                 redirect('/')
-            }, 2000)
+            }, 3000)
         }
         else{
             setWarning(response)
@@ -37,6 +37,9 @@ function SignUp(){
     
 
     return(
+        
+        !showTemp? 
+
         <UserPassword 
             heading={"Create Account"} 
             btnLabel={"sign up"} 
@@ -45,12 +48,23 @@ function SignUp(){
             uProcedure={setUser} 
             password={password} 
             pProcedure={setPassword}
-            linkMessage={"Already have an account? Log in "}
+            bottomMessage={"Already have an account? "}
             linkTarget={"/"}
+            linkPhrase={"Log In"}
             modalBool={show}
             modalProcedure ={handleClose}
             modalWarning={warning}
         />
+
+       :
+
+        <div style={{height: "100vh", overflow: "hidden", backgroundColor: "grey"}}>
+            <div style={{display: "flex", flexDirection:"flex-column", justifyContent: "center", alignItems:"center", height: "100%"}}>
+                <div style={{backgroundColor: "#212529",color: "white", padding:"4rem", width:"50%", borderRadius: "3px"}}>
+                    <h1>Automatically redirecting in 3 seconds...</h1>
+                </div>
+            </div>
+        </div>
     )
 }
 

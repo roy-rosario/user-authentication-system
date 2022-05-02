@@ -15,18 +15,28 @@ function LogIn(){
 
     const login = async(e) =>{
         e.preventDefault()
-       
-        const response = await profileAuthenticate(user, password)
-            if(typeof response === "object"){
-                localStorage.setItem('token', response.accessToken)
-                redirect('/dashboard')
-                return
-            }
-            else{
-                setWarning(response)
-                handleShow()
-                return
-            }       
+        if(user === ""){
+            setWarning('username cannot be empty')
+            handleShow()
+            return
+        }
+        if(password === ""){
+            setWarning('password cannot be empty')
+            handleShow()
+            return
+        }
+        const result = await profileAuthenticate(user, password)
+        if(typeof result === "object"){
+            localStorage.setItem('token', result.accessToken)
+            redirect('/dashboard')
+            return
+        }
+        else{
+            setWarning(result)
+            handleShow()
+            return
+        }
+        
 
     }
 
@@ -39,8 +49,9 @@ function LogIn(){
                 uProcedure={setUser} 
                 password={password} 
                 pProcedure={setPassword}
-                linkMessage={"Don't have an account? Sign up "}
+                bottomMessage={"Don't have an account? "}
                 linkTarget={"/signup"}
+                linkPhrase={"Sign up"}
                 modalBool={show}
                 modalProcedure ={handleClose}
                 modalWarning={warning}
