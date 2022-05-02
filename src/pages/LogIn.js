@@ -15,28 +15,18 @@ function LogIn(){
 
     const login = async(e) =>{
         e.preventDefault()
-        if(user === ""){
-            setWarning('username cannot be empty')
-            handleShow()
-            return
-        }
-        if(password === ""){
-            setWarning('password cannot be empty')
-            handleShow()
-            return
-        }
-        const result = await profileAuthenticate(user, password)
-        if(typeof result === "object"){
-            localStorage.setItem('token', result.accessToken)
-            redirect('/dashboard')
-            return
-        }
-        else{
-            setWarning(result)
-            handleShow()
-            return
-        }
-        
+       
+        const response = await profileAuthenticate(user, password)
+            if(typeof response === "object"){
+                localStorage.setItem('token', response.accessToken)
+                redirect('/dashboard')
+                return
+            }
+            else{
+                setWarning(response)
+                handleShow()
+                return
+            }       
 
     }
 

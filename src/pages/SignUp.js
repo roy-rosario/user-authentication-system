@@ -7,25 +7,34 @@ function SignUp(){
     const [user, setUser] = useState('')
     const [password, setPassword] = useState('')
     const redirect = useNavigate()
+    const [show, setShow] = useState(false)
+    const [warning, setWarning] = useState('')
 
-    console.log(user ,password)
+    const handleShow = () =>{setShow(true)}
+    const handleClose = () =>{setShow(false)}
+
 
     const createUser= async(e)=>{
         e.preventDefault()
-        if(user === "") return alert('username required!')
-        if(password === "") return alert('password required!')
-        try{
-            const response = await profileCreate(user, password)
-            console.log(response)
-            if(response){
+        
+        const response = await profileCreate(user, password)
+
+        
+        if(typeof response === 'object'){
+            alert(response.message+" press okay to be redirected to log in page")
+            setTimeout(()=>{
                 redirect('/')
-            }
+            }, 2000)
         }
-        catch{
-            alert("could not post user")
+        else{
+            setWarning(response)
+            handleShow()
+            return
         }
         
     }
+
+    
 
     return(
         <UserPassword 
@@ -38,6 +47,9 @@ function SignUp(){
             pProcedure={setPassword}
             linkMessage={"Already have an account? Log in "}
             linkTarget={"/"}
+            modalBool={show}
+            modalProcedure ={handleClose}
+            modalWarning={warning}
         />
     )
 }

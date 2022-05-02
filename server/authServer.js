@@ -30,9 +30,12 @@ server.get('/users', async(req, res)=>{
 server.post('/signup', async(req, res)=>{
     const hashedPassword = await bcrypt.hash(req.body.password, 10)
     try{
+        if(req.body.username === "") return res.status(400).send('username field cannot be blank')
+        if(req.body.password === "") return res.status(400).send('password field cannot be blank')
+        if(req.body.password.length < 6) return res.status(400).send('password must be 6 characters or more')
         const newUser = {username: req.body.username, password: hashedPassword}
         await db.promise().query(`INSERT INTO users (username, password) VALUES ("${newUser.username}", "${newUser.password}")`)
-        .then(result => res.status(200).send("user created"))
+        .then(result => res.status(200).json({message: 'user creation successful'}))
         .catch(err => alert(err))
     }
     catch{
