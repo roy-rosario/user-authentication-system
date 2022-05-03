@@ -52,7 +52,7 @@ server.post('/login', async(req, res)=>{
         const passed = await bcrypt.compare(req.body.password, userPresent[0][0].password)
         if(passed){
             const user = {username: req.body.username}
-            const accessToken = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, {expiresIn: "15s"})
+            const accessToken = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET)
             const refreshToken = jwt.sign(user, process.env.REFRESH_TOKEN_SECRET)
             //refreshTokens.push(refreshToken)
             return res.status(200).json({accessToken: accessToken, refreshToken: refreshToken})

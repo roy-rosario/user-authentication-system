@@ -1,6 +1,9 @@
+import DashboardMobile from '../components/DashboardMobile'
 import {useEffect, useState} from 'react'
 import {useNavigate} from 'react-router-dom'
 import {verification} from '../services/authServices'
+import Nav from 'react-bootstrap/Nav'
+import Card from 'react-bootstrap/Card'
 
 
 function Dashboard(){
@@ -21,13 +24,12 @@ function Dashboard(){
 
     return(
         verified? 
-        <div>
-            <h1>Dashboard</h1>
-        </div>
+        <DashboardMobile/>
         :
         <div>
-            
+
         </div>
+        //the second div is so that the browser doesn't display the dashboard to the user in the cases that the API call delays for a second
     )
 }
 

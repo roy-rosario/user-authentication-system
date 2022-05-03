@@ -16,3 +16,26 @@
         width: 25%;
     }
 }
+
+/*DASHBOARD-MOBILE-COMPONENT STYLES*/
+.mobile-container{
+    background-color: grey;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.heading-portion{
+    
+    min-height: 10%;
+}
+
+.body-portion{
+
+    min-height: 80%;
+}
+
+.footer-portion{
+
+    min-height: 10%;
+}
