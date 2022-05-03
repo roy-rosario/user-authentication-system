@@ -4,6 +4,7 @@ import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import Modal from 'react-bootstrap/Modal'
 import{Link} from 'react-router-dom'
+import './styles.css'
 
 
 
@@ -14,7 +15,7 @@ function UserPassword({heading, btnLabel, submit, user, uProcedure, password, pP
         <div style={{height:"100vh", overflow: "hidden", backgroundColor: "grey"}} >
             
             <Container className="d-flex flex-column justify-content-center align-items-center h-100" fluid>
-                <Form  className="bg-dark text-light p-4 rounded w-50" onSubmit={submit} >
+                <Form  className="bg-dark text-light p-4 rounded form-width" onSubmit={submit} >
                     <h1>{heading}</h1>
                     <Form.Group >
                         <Form.Label>username</Form.Label>
