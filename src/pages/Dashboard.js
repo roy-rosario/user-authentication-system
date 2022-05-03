@@ -4,12 +4,14 @@ import {verification} from '../services/authServices'
 
 
 function Dashboard(){
+    const [verified, setVerified] = useState(false)
     const redirect = useNavigate()
 
     const verify = async()=>{
         await verification()
         .then(res => !res.data && redirect('/'))
         .catch(err => alert(err))
+        setVerified(true)
     }
 
     useEffect(()=>{
@@ -18,8 +20,13 @@ function Dashboard(){
 
 
     return(
+        verified? 
         <div>
             <h1>Dashboard</h1>
+        </div>
+        :
+        <div>
+            
         </div>
     )
 }
