@@ -33,7 +33,6 @@ function Dashboard(){
         retrievePosts()
     },[])
 
-    console.log(posts)
 
     return(
         verified? 
