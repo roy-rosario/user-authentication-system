@@ -6,8 +6,8 @@ export const getPosts = async() =>{
     return(
         await axios.post('http://localhost:3001/posts', {token: localStorage.getItem('token')})
         .then(result =>{
-            placeholder = result.data
-            return placeholder
+            placeholder = result
+            return placeholder.data
         })
         .catch(err=>{
             placeholder = err.response.data

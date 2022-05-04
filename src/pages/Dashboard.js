@@ -8,6 +8,7 @@ import { get } from 'express/lib/request'
 
 function Dashboard(){
     const [verified, setVerified] = useState(false)
+    const [user, setUser] = useState("")
     const [posts, setPosts] = useState([])
     const redirect = useNavigate()
 
@@ -20,7 +21,10 @@ function Dashboard(){
 
     const retrievePosts = async() =>{
         await getPosts()
-        .then(res => setPosts(res))
+        .then(res => {
+            setUser(res.username)
+            setPosts(res.posts)
+        })
         .catch(err => alert(err))
     }
 
@@ -29,7 +33,7 @@ function Dashboard(){
         retrievePosts()
     },[])
 
-    console.log(posts)
+    console.log(user, posts)
 
     return(
         verified? 

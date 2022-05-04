@@ -36,7 +36,7 @@ server.post("/posts", verifyToken, async(req, res)=>{
         const result = await db.promise().query(`SELECT * FROM posts
         JOIN users ON posts.user_id = users.id
         HAVING users.username = "${req.user.username}"`)
-        res.status(200).json(result[0])
+        res.status(200).json({username: req.user.username, posts: result[0]})
     }
     catch{
         res.status(400).send('could not request data')
