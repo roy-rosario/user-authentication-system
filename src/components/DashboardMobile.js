@@ -15,7 +15,7 @@ function DashboardMobile(){
                     </Dropdown.Toggle>
 
                     <Dropdown.Menu style={{backgroundColor: "#4f4f4f", textAlign:"center"}}>
-                        <Dropdown.Item  className="text-light px-0" href="#/action-1">Log Out</Dropdown.Item>
+                        <Dropdown.Item  className="text-light px-0" href="http://localhost:3000/">Log Out</Dropdown.Item>
                         {/* <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
                         <Dropdown.Item href="#/action-3">Something else</Dropdown.Item> */}
                     </Dropdown.Menu>
