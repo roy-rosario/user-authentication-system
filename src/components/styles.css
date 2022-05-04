@@ -19,23 +19,34 @@
 
 /*DASHBOARD-MOBILE-COMPONENT STYLES*/
 .mobile-container{
-    background-color: grey;
+    background-image:linear-gradient(black, rgb(75, 75, 75));
+    background-size: cover;
     height: 100vh;
     display: flex;
     flex-direction: column;
 }
 
+.mobile-container > *{
+    padding: 0;
+    margin: 0;
+}
+
+
 .heading-portion{
     
-    min-height: 10%;
+    height: 10%;
 }
 
 .body-portion{
 
-    min-height: 80%;
+    height: 80%;
 }
 
 .footer-portion{
 
-    min-height: 10%;
+    height: 10%;
+}
+
+.material-symbols-outlined{
+    font-size: 36px;
 }
