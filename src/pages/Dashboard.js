@@ -33,11 +33,11 @@ function Dashboard(){
         retrievePosts()
     },[])
 
-    console.log(user, posts)
+    console.log(posts)
 
     return(
         verified? 
-        <DashboardMobile />
+        <DashboardMobile user={user} posts={posts} />
         :
         <div>
 

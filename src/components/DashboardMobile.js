@@ -1,17 +1,18 @@
 import Container from 'react-bootstrap/Container'
-import ButtonGroup from 'react-bootstrap/ButtonGroup'
-import Button from 'react-bootstrap/Button'
 import Dropdown from 'react-bootstrap/Dropdown'
 import './styles.css'
 
-function DashboardMobile(){
+function DashboardMobile({user, posts}){
     return(
         <div className='mobile-container'>
+
+{/* HEADER */}
+
             <Container className=" h-100" fluid>
                 <Container  className="heading-portion bg-secondary d-flex flex-row-reverse align-items-center" fluid>
                 <Dropdown >
                     <Dropdown.Toggle style={{boxShadow: 'none'}} className="bg-transparent border-0" id="dropdown-basic" >
-                        username
+                        {user}
                     </Dropdown.Toggle>
 
                     <Dropdown.Menu style={{backgroundColor: "#4f4f4f", textAlign:"center"}}>
@@ -21,9 +22,32 @@ function DashboardMobile(){
                     </Dropdown.Menu>
                     </Dropdown>
                 </Container>
-                <Container className="body-portion bg-transparent text-light  d-flex justify-content-center align-items-center" fluid>
-                    <h3>Content goes here</h3>
+                
+{/* BODY-SECTION ----this should become a carousel */}
+
+                <Container className="body-portion bg-transparent text-light d-flex flex-column justify-content-center" fluid>
+       
+                    <div  style={{  overflow: "scroll"}}>
+                        {
+                            posts && posts.map(post => {
+                                return(
+                                    <div key={post.id}  style={{borderBottom: "1px solid white", padding: "1rem"}}>
+                                        <div style={{display:"flex", alignItems: "baseline"}}>
+                                            <h5 style={{marginRight: "0.75rem"}}>{user}</h5>
+                                            <h6 >{post.title}</h6>
+                                        </div>
+
+                                        <p>{post.body}</p>
+                                    </div>
+                                )
+                            })
+                        }
+                    </div>
+
                 </Container>
+
+{/* FOOTER-SECTION */}
+
                 <Container className="footer-portion bg-secondary text-light d-flex justify-content-between align-items-center px-5" fluid>
                     <span className="material-symbols-outlined">chat</span>
                     <span className="material-symbols-outlined">home</span>

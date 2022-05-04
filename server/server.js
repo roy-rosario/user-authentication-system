@@ -33,9 +33,9 @@ const db = mysql.createConnection({
 
 server.post("/posts", verifyToken, async(req, res)=>{
     try{
-        const result = await db.promise().query(`SELECT * FROM posts
+        const result = await db.promise().query(`SELECT posts.id, posts.title, posts.body FROM posts
         JOIN users ON posts.user_id = users.id
-        HAVING users.username = "${req.user.username}"`)
+        WHERE users.username = "${req.user.username}"`)
         res.status(200).json({username: req.user.username, posts: result[0]})
     }
     catch{

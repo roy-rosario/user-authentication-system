@@ -60,8 +60,8 @@ function SignUp(){
 
         <div style={{height: "100vh", overflow: "hidden", backgroundColor: "grey"}}>
             <div style={{display: "flex", flexDirection:"flex-column", justifyContent: "center", alignItems:"center", height: "100%"}}>
-                <div style={{backgroundColor: "#212529",color: "white", padding:"4rem", width:"50%", borderRadius: "3px"}}>
-                    <h1>Automatically redirecting in 3 seconds...</h1>
+                <div style={{backgroundColor: "#212529",color: "white", padding:"2rem", width:"50%", borderRadius: "3px"}}>
+                    <h1>redirecting in 3 seconds...</h1>
                 </div>
             </div>
         </div>
