@@ -21,21 +21,21 @@ const db = mysql.createConnection({
     database: "test_page"
 })
 
-server.get('/posts', async(req, res)=>{
-    try{
-        const result = await db.promise().query(`SELECT * FROM posts`)
-        res.status(200).json(result[0])
-    }
-    catch{
-        res.status(400).send('could not retrieve users')
-    }
-})
+// server.get('/posts', async(req, res)=>{
+//     try{
+//         const result = await db.promise().query(`SELECT * FROM posts`)
+//         res.status(200).json(result[0])
+//     }
+//     catch{
+//         res.status(400).send('could not retrieve users')
+//     }
+// })
 
 server.post("/posts", verifyToken, async(req, res)=>{
     try{
         const result = await db.promise().query(`SELECT * FROM posts
         JOIN users ON posts.user_id = users.id
-        HAVING users.username = "${req.body.username}"`)
+        HAVING users.username = "${req.user.username}"`)
         res.status(200).json(result[0])
     }
     catch{
@@ -44,7 +44,7 @@ server.post("/posts", verifyToken, async(req, res)=>{
 })
 
 function verifyToken(req, res, next){
-    const token = localStorage.getItem('token')
+    const token = req.body.token
     jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, decoded)=>{
         if(err) return res.status(403).send("invalid credentials")
         req.user = decoded
